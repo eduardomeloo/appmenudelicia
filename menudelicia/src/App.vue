@@ -2,22 +2,22 @@
     <v-app>
         <Header />
         <v-main>
-            <HelloWorld />
+            <Main />
         </v-main>
         <Footer />
     </v-app>
 </template>
 
 <script>
-import Header from "@/components/templates/Header";
-import Footer from "@/components/templates/Footer";
-import HelloWorld from "./components/HelloWorld";
+import Header from "@/components/publicArea/templates/Header";
+import Footer from "@/components/publicArea/templates/Footer";
+import Main from "@/components/publicArea/Main";
 
 export default {
     name: "App",
 
     components: {
-        HelloWorld,
+        Main,
         Header,
         Footer
     },
