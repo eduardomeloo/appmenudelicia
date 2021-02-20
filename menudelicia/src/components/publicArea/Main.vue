@@ -25,9 +25,8 @@
                     <Dialog :title="title" v-show="dialog" />
                     </v-dialog>
                 </v-row>
-                        
-                    
             </v-card-actions>
+            
         </v-card>
 
         <SubMenu />

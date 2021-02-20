@@ -1,6 +1,6 @@
 <template>
     <header>
-        <v-app-bar app color="#F4511E">
+        <v-app-bar app dense color="#F4511E">
             <v-spacer></v-spacer>
 
             <v-app-bar-nav-icon
