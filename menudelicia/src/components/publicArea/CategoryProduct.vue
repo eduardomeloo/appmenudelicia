@@ -1,11 +1,23 @@
 <template v-cloak>
     <div>
-        <Dialog :title="title" v-if="dialog" />
+        <v-card-actions class="d-flex flex-column justify-center">
+            <v-row justify="space-around">
+                <v-dialog
+                    v-model="addProduct"
+                    transition="dialog-top-transition"
+                    max-width="600"
+                    :fullscreen="true"
+                    
+                >
+                    <AddProduct :title="title" v-if="addProduct" />
+                </v-dialog>
+            </v-row>
+        </v-card-actions>
         <v-row>
             <template v-for="(item, i) in items" >
             <v-col :key="i" cols="12" v-if="categories === item.categoryProduct">
                 <v-card
-                    @click="dialog = !dialog"
+                    @click="addProduct = !addProduct"
                     shaped
                     hover>
                     <div class="d-flex flex-no-wrap justify-space-between">
@@ -37,12 +49,13 @@
             </div>
 </template>
 <script>
-import Dialog from "@/components/publicArea/Dialog";
+import AddProduct from "@/components/publicArea/AddProduct";
 export default {
-    components: {Dialog},
+    components: {AddProduct},
     props: ['categories'],
     data: () => {
         return {
+            title: 'Adicionar Produto',
             items: [
                 {
                     src: "https://cdn.pixabay.com/photo/2017/04/28/16/41/the-pan-2268825_1280.png",
@@ -69,12 +82,12 @@ export default {
         };
     },
     computed: {
-        dialog: {
+        addProduct: {
             get: function() {
-                return this.$store.state.dialog
+                return this.$store.state.addProduct
             },
             set: function(newValue) {
-                this.$store.state.dialog = newValue
+                this.$store.state.addProduct = newValue
             },
         }
     },

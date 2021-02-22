@@ -9,7 +9,8 @@ export default new Vuex.Store({
     state: {
         drawer: false,
         group: null,
-        dialog: false
+        dialog: false,
+        addProduct: false
     },
     mutations: {
         setDrawer(state, newValue) {
@@ -17,6 +18,9 @@ export default new Vuex.Store({
         },
         setDialog(state, newValue) {
             state.dialog = newValue
+        },
+        setAddProduct(state, newValue) {
+            state.addProduct = newValue
         },
     }
 })
