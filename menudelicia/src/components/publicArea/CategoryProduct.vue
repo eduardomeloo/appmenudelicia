@@ -1,4 +1,4 @@
-<template v-cloak>
+<template>
     <div>
         <v-card-actions class="d-flex flex-column justify-center">
             <v-row justify="space-around">
@@ -13,40 +13,42 @@
                 </v-dialog>
             </v-row>
         </v-card-actions>
-        <v-row>
+        <v-row class="pb-10">
             <template v-for="(item, i) in items" >
-            <v-col :key="i" cols="12" v-if="categories === item.categoryProduct">
-                <v-card
-                    @click="addProduct = !addProduct"
-                    shaped
-                    hover>
-                    <div class="d-flex flex-no-wrap justify-space-between">
-                        <div>
-                            <v-card-title
-                                class="headline pb-5"
-                                v-text="item.title"
-                            ></v-card-title>
+                <v-col :key="i" cols="auto" v-if="categories === item.categoryProduct">
+                    <v-card
+                        elevation="3"
+                        max-height="200"
+                        max-width="400"
+                        @click="addProduct = !addProduct"
+                        hover>
+                        <div class="d-flex flex-no-wrap justify-space-between">
+                            <div>
+                                <v-card-title
+                                    class="headline pb-5 text-h6"
+                                    v-text="item.title"
+                                ></v-card-title>
 
-                            <v-card-subtitle
-                                v-text="item.info"
-                            ></v-card-subtitle>
+                                <v-card-subtitle
+                                    v-text="item.info"
+                                ></v-card-subtitle>
 
-                            <v-card-actions>
-                                <v-btn class="ml-2 mt-5" color="#FF6F00" outlined small>
-                                    A partir de: R$ 12,99
-                                </v-btn>
-                            </v-card-actions>
+                                <v-card-actions>
+                                    <v-btn class="ml-2 mb-5" color="#FF6F00" outlined small>
+                                        A partir de: R$ 12,99
+                                    </v-btn>
+                                </v-card-actions>
+                            </div>
+
+                            <v-avatar class="ma-3" size="130" height="auto" tile>
+                                <v-img :src="item.src"></v-img>
+                            </v-avatar>
                         </div>
-
-                        <v-avatar class="ma-3" size="130" height="auto" tile>
-                            <v-img :src="item.src"></v-img>
-                        </v-avatar>
-                    </div>
-                </v-card>
-            </v-col>
+                    </v-card>
+                </v-col>
             </template>
-            </v-row>
-            </div>
+        </v-row>
+    </div>
 </template>
 <script>
 import AddProduct from "@/components/publicArea/AddProduct";
@@ -63,7 +65,7 @@ export default {
                     info: "Temos várias opções de quentinhas",
                     categoryProduct: "Quentinha"
                 },{
-                    src: "https://japario.com/delivery/349-large_default/coca-cola-lata.jpg",
+                    src: "https://www.kerokery.com.br/media/catalog/product/cache/1/image/800x/9df78eab33525d08d6e5fb8d27136e95/k/k/kkr-_157-sku-801___bebidas__coca-cola-lata-350ml.jpg",
                     title: "Coca-Lata 350ML",
                     info: "",
                     categoryProduct: "Bebidas"

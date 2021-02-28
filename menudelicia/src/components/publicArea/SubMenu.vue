@@ -1,7 +1,6 @@
 <template>
   <v-card>
     <v-tabs
-      @click="forceRerender"
       v-model="tab"
       background-color="red"
       color="white"
@@ -23,8 +22,9 @@
       <v-tab-item
         v-for="item in items"
         :key="item.tab"
+        transition="false"
       >
-        <v-card flat>
+        <v-card>
             <CategoryProduct :categories="item.tab" :key="componentKey" />
         </v-card>
       </v-tab-item>
@@ -48,11 +48,6 @@ export default {
             ],
         }
     },
-    methods: {
-        forceRerender() {
-            this.componentKey += 1;  
-        }
-    }
 }
 </script>
 <style>
