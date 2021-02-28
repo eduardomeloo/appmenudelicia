@@ -6,10 +6,9 @@
                     v-model="addProduct"
                     transition="dialog-top-transition"
                     max-width="600"
-                    :fullscreen="true"
-                    
+                    :fullscreen="false"
                 >
-                    <AddProduct :title="title" v-if="addProduct" />
+                    <AddProduct :title="title" v-if="addProduct" @closeDialog="addProduct = $event" />
                 </v-dialog>
             </v-row>
         </v-card-actions>
@@ -17,9 +16,9 @@
             <template v-for="(item, i) in items" >
                 <v-col :key="i" cols="auto" v-if="categories === item.categoryProduct">
                     <v-card
-                        elevation="3"
-                        max-height="200"
-                        max-width="400"
+                        min-width="380"
+                        max-width="380"
+                        elevation="3"                        
                         @click="addProduct = !addProduct"
                         hover>
                         <div class="d-flex flex-no-wrap justify-space-between">
@@ -30,8 +29,17 @@
                                 ></v-card-title>
 
                                 <v-card-subtitle
+                                    v-if="item.info"
                                     v-text="item.info"
+                                    
                                 ></v-card-subtitle>
+                                
+                                <v-card-subtitle 
+                                    v-else
+                                    class="pt-5"
+                                    >
+
+                                </v-card-subtitle>
 
                                 <v-card-actions>
                                     <v-btn class="ml-2 mb-5" color="#FF6F00" outlined small>
@@ -62,7 +70,7 @@ export default {
                 {
                     src: "https://cdn.pixabay.com/photo/2017/04/28/16/41/the-pan-2268825_1280.png",
                     title: "Quentinhas",
-                    info: "Temos várias opções de quentinhas",
+                    info: "Várias opções...",
                     categoryProduct: "Quentinha"
                 },{
                     src: "https://www.kerokery.com.br/media/catalog/product/cache/1/image/800x/9df78eab33525d08d6e5fb8d27136e95/k/k/kkr-_157-sku-801___bebidas__coca-cola-lata-350ml.jpg",
