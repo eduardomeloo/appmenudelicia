@@ -25,7 +25,7 @@
         transition="false"
       >
         <v-card>
-            <CategoryProduct :categories="item.tab" :key="componentKey" />
+            <CategoryProduct :categories="item.tab" />
         </v-card>
       </v-tab-item>
     </v-tabs-items>

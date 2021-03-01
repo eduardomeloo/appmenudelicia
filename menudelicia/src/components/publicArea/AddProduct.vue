@@ -4,9 +4,37 @@
                    color="#F4511E" 
                    dark 
                    class="text-h6 d-flex justify-center text-center">
-            {{ title }} <v-icon class="ml-5">mdi-cart-plus</v-icon>
+            Adicionar Produto <v-icon class="ml-5">mdi-cart-plus</v-icon>
         </v-toolbar>
         <div class="d-flex flex-column justify-center">
+            <v-card-title
+                class="headline pb-5 text-h5 justify-center"
+                v-text="product.title"
+            >
+            </v-card-title>
+            <v-img
+                height="250"
+                contain
+                :src="product.src"
+            >
+            </v-img>
+
+            <v-card-subtitle
+                class="mt-5"
+                v-if="product.info"
+                v-text="product.info"
+            >
+            </v-card-subtitle>
+
+            <v-container fluid>
+                <p>{{ selected }}</p>
+                <v-checkbox :readonly="selected.length >= 2" onclick="return false" type="checkbox" v-model="selected" label="Arroz" value="Arroz"></v-checkbox>
+                <v-checkbox :readonly="selected.length >= 1" type="checkbox" v-model="selected" label="Feijão Comum" value="Feijão Comum"></v-checkbox>
+            </v-container>  
+
+            <v-card class="d-flex flex-column justify-center">
+                {{product}}
+            </v-card>
 
             <v-divider class="mx-4"></v-divider>
 
@@ -18,7 +46,7 @@
                 class="d-flex justify-center"
             >
                 <div class="d-flex justify-center">
-                    <div class="d-flex justify-center mt-2 ">
+                    <div class="d-flex justify-center mt-4">
                         <v-btn 
                             class="d-flex justify-center" 
                             outlined 
@@ -52,9 +80,12 @@
                     </div>
                     
                     <v-card-actions class="d-flex justify-center">
-                        <v-btn block @click="closeDialog" color="#FF6F00" outlined>
-                            Adicionar
+                        <v-btn block @click="closeDialog" color="#FF6F00" outlined height=55> 
+                            Adicionar <br /><br />
+                            
+                            {{ real(product.price * qtdItems)}}
                         </v-btn>
+
                     </v-card-actions>
                 </div>
             </v-col>
@@ -67,12 +98,20 @@
     </v-card>
 </template>
 <script>
+import Utils from '@/config/Utils'
 export default {
     name: "AddProduct",
-    props: ["title"],
+    mixins: [Utils],
+    props: {
+        product: Object
+    },
     data() {
         return {
-            qtdItems: 1
+            qtdItems: 1,
+            selected: [],
+            nameRules: [
+                selected => selected.length < 2 || 'Quantidade de ítens já está no limite',
+            ],
         }
     },
     methods: {
