@@ -13,7 +13,7 @@
             >
             </v-card-title>
             <v-img
-                height="250"
+                height="200"
                 contain
                 :src="product.src"
             >
@@ -24,13 +24,33 @@
                 v-if="product.info"
                 v-text="product.info"
             >
-            </v-card-subtitle>
 
-            <v-container fluid>
-                <p>{{ selected }}</p>
-                <v-checkbox :readonly="selected.length >= 2" onclick="return false" type="checkbox" v-model="selected" label="Arroz" value="Arroz"></v-checkbox>
-                <v-checkbox :readonly="selected.length >= 1" type="checkbox" v-model="selected" label="Feijão Comum" value="Feijão Comum"></v-checkbox>
-            </v-container>  
+            </v-card-subtitle>
+            {{selected}}
+            <!-- <v-container fluid class="input-check"> -->
+                <!--  @click.prevent="validCheck(itens)" -->
+                <ul>
+                    <li v-for="(itens) in cardapioDodia" :key="itens.id">
+                        <label>
+                            <input
+                                @click="validCheck(itens)"
+                                v-model="selected"
+                                type="checkbox" 
+                                :value="itens"
+                                :id="itens.id"
+                                ><span><strong>{{ itens.name }}</strong></span>
+                        </label>
+                    </li>
+                    <v-alert
+                        v-if="qtdMaxItensError"
+                        dense
+                        outlined
+                        type="error"
+                    >
+                        Você já selecionou <strong>2</strong> ítens
+                    </v-alert>
+                </ul>
+            <!-- </v-container> -->
 
             <v-card class="d-flex flex-column justify-center">
                 {{product}}
@@ -107,7 +127,22 @@ export default {
     },
     data() {
         return {
+            testee: false,
             qtdItems: 1,
+            qtdMaxItensError: false,
+            cardapioDodia: [{
+                                id: 1,
+                                name: 'Arroz',
+                                checked: false
+                            },{
+                                id: 2,
+                                name: 'Fejão Comum',
+                                checked: false
+                            },{
+                                id: 3,
+                                name: 'Fejão Tropeiro',
+                                checked: false
+                            }],
             selected: [],
             nameRules: [
                 selected => selected.length < 2 || 'Quantidade de ítens já está no limite',
@@ -118,10 +153,20 @@ export default {
         closeDialog() {
             // this.$store.commit('setAddProduct', false)
             this.$emit('closeDialog', false)
+        },
+        validCheck(item) {
+            if (this.selected.length > 1 && this.selected.indexOf(item) === -1) {
+                document.getElementById(item.id).checked=false;
+                this.qtdMaxItensError = true
+            } 
         }
     },
 };
 </script>
 
 <style>
+.input-check {
+    color: black;
+    background-color: coral;
+}
 </style>
