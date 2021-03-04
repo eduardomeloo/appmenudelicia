@@ -4,6 +4,8 @@ import vuetify from './plugins/vuetify';
 
 import store from './config/store'
 
+import '@/config/style'
+
 Vue.config.productionTip = false
 
 new Vue({

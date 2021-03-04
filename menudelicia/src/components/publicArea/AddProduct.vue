@@ -19,42 +19,34 @@
             >
             </v-img>
 
-            <v-card-subtitle
-                class="mt-5"
-                v-if="product.info"
-                v-text="product.info"
-            >
+            <v-card-subtitle class="mt-5" v-if="product.info" v-text="product.info" >
 
             </v-card-subtitle>
-            {{selected}}
-            <!-- <v-container fluid class="input-check"> -->
-                <!--  @click.prevent="validCheck(itens)" -->
-                <ul>
-                    <li v-for="(itens) in cardapioDodia" :key="itens.id">
-                        <label>
-                            <input
-                                @click="validCheck(itens)"
-                                v-model="selected"
-                                type="checkbox" 
-                                :value="itens"
-                                :id="itens.id"
-                                ><span><strong>{{ itens.name }}</strong></span>
-                        </label>
-                    </li>
-                    <v-alert
-                        v-if="qtdMaxItensError"
-                        dense
-                        outlined
-                        type="error"
-                    >
-                        Você já selecionou <strong>2</strong> ítens
-                    </v-alert>
-                </ul>
-            <!-- </v-container> -->
 
-            <v-card class="d-flex flex-column justify-center">
-                {{product}}
-            </v-card>
+            <div class="pretty p-icon p-curve p-jelly d-flex flex-column ma-4" v-for="(itens) in cardapioDodia" :key="itens.id">
+                <input 
+                    @click="validCheck(itens)"
+                    v-model="selected"
+                    type="checkbox" 
+                    :value="itens" 
+                    :id="itens.id" 
+                    size="3"
+                >
+                <div class="state p-warning">
+                    <i class="icon mdi mdi-check"></i>
+                    <label><strong>{{ itens.name }}</strong></label>
+                </div>
+            </div>
+
+            <!-- <v-alert
+                v-if="qtdMaxItensError"
+                dense
+                outlined
+                type="error"
+            >
+                Você já selecionou <strong>2</strong> ítens
+            </v-alert> -->
+
 
             <v-divider class="mx-4"></v-divider>
 
@@ -158,13 +150,15 @@ export default {
             if (this.selected.length > 1 && this.selected.indexOf(item) === -1) {
                 document.getElementById(item.id).checked=false;
                 this.qtdMaxItensError = true
+                //document.getElementById("div1").removeAttribute("align")
             } 
-        }
+        },
     },
 };
 </script>
 
 <style>
+
 .input-check {
     color: black;
     background-color: coral;
